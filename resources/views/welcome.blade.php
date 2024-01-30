@@ -15,7 +15,15 @@
                 </div>
                 <div class="col">
                     @if (Auth::check())
-                        <button class="btn btn-dark m-2">Enter</button>
+                        @if (Auth::user()->id != $course->user_id)
+                            <button class="btn btn-dark m-2">Apply</button>
+                        @endif
+                        @if(Auth::user()->id == 1)
+                            <button class="btn btn-dark m-2">Enter</button>
+                            <button class="btn btn-danger m-2">Delete</button>
+                            <button class="btn btn-warning m-2">Edit</button>
+                            <button class="btn btn-info m-2">Show</button>
+                        @endif
                     @endif
                 </div>
             </div>
