@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CourseUserController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +27,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/chapters', ChapterController::class);
+Route::resource('/courses', CourseController::class);
+Route::resource('/course_users', CourseUserController::class);
+Route::resource('/questions', QuestionController::class);
+Route::resource('/schools', SchoolController::class);
+Route::resource('/types', TypeController::class);

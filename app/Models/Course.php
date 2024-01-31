@@ -22,8 +22,8 @@ class Course extends Model
         return $this->hasMany(Chapter::class);
     }
 
-    public function user_course() : BelongsTo
+    public function user_course() : HasMany
     {
-        return $this->belongsTo(CourseUser::class);
+        return $this->hasMany(CourseUser::class);
     }
 }
