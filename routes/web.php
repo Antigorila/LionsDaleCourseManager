@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseUserController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,3 +34,4 @@ Route::resource('/course_users', CourseUserController::class);
 Route::resource('/questions', QuestionController::class);
 Route::resource('/schools', SchoolController::class);
 Route::resource('/types', TypeController::class);
+Route::resource('/users', UserController::class);

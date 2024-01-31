@@ -19,6 +19,7 @@ class QuestionFactory extends Factory
         return [
             'question' => fake()->words(5, true),
             'answer' => fake()->word(),
+            'chapter_id' => fake()->numberBetween(1,15)
         ];
     }
 }

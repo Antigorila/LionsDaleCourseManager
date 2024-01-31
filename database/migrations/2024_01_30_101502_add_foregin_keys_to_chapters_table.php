@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::table('chapters', function (Blueprint $table) {
            $table->foreign(['course_id'], 'chapters_ibfk_4')->references(['id'])->on('courses');
-           $table->foreign(['question_id'], 'chapters_ibfk_5')->references(['id'])->on('questions');
         });
     }
 
@@ -24,7 +23,6 @@ return new class extends Migration
     {
         Schema::table('chapters', function (Blueprint $table) {
             $table->foreign(['course_id'], 'chapters_ibfk_4')->references(['id'])->on('courses');
-            $table->foreign(['question_id'], 'chapters_ibfk_5')->references(['id'])->on('questions');
         });
     }
 };

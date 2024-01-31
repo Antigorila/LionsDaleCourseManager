@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CourseUser;
 use App\Http\Requests\StoreCourseUserRequest;
 use App\Http\Requests\UpdateCourseUserRequest;
+use App\Models\Course;
 
 class CourseUserController extends Controller
 {
@@ -37,7 +38,7 @@ class CourseUserController extends Controller
      */
     public function show(CourseUser $courseUser)
     {
-        //
+        //return view('show.course_user', ['courseUser' => $courseUser]);
     }
 
     /**

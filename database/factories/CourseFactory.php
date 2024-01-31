@@ -20,7 +20,7 @@ class CourseFactory extends Factory
 
         return [
             'level' => fake()->randomElement($level),      
-            'description' => fake()->paragraph(5, true),   
+            'description' => fake()->paragraph(25, true),   
         ];
     }
 }

@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
-            $table->integer('id', true);
-            $table->string('question');
-            $table->string('answer');
-            $table->integer('chapter_id')->default(1)->index('chapter_id');
-            $table->timestamps();
+        Schema::table('questions', function (Blueprint $table) {
+            $table->foreign(['chapter_id'], 'questions_ibfk_4')->references(['id'])->on('chapters');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::table('questions', function (Blueprint $table) {
+            //
+        });
     }
 };
