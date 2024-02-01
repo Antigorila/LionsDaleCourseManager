@@ -28,10 +28,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::resource('/chapters', ChapterController::class);
+
 Route::resource('/courses', CourseController::class);
+Route::get('/courses/{course}/showUsers', [CourseController::class, 'showUsers'])->name('courses.showUsers');
+
 Route::resource('/course_users', CourseUserController::class);
+Route::patch('/course_users/{course_users}/updateSeen', [CourseUserController::class, 'updateSeen'])->name('course_users.updateSeen');
+Route::patch('/course_users/{course_users}/updateCompleted', [CourseUserController::class, 'updateCompleted'])->name('course_users.updateCompleted');
+
 Route::resource('/questions', QuestionController::class);
+
 Route::resource('/schools', SchoolController::class);
+
 Route::resource('/types', TypeController::class);
+
 Route::resource('/users', UserController::class);
+Route::patch('/users/{user}/updateActivity', [UserController::class, 'updateActivity'])->name('users.updateActivity');

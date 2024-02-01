@@ -16,7 +16,7 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
-        $level = ['Beginner', 'Intermediate', 'Advanced', 'Master', 'Jedi Master'];
+        $level = ['Beginner', 'Intermediate', 'Advanced', 'Master', 'Jedi Master', 'Doom Slayer'];
 
         return [
             'level' => fake()->randomElement($level),      

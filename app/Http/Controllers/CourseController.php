@@ -40,12 +40,17 @@ class CourseController extends Controller
         return view('show.course', ['course' => $course]);
     }
 
+    public function showUsers(Course $course)
+    {
+        return view('show.course_user', ['course' => $course]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Course $course)
     {
-        //
+        return view('edit.course', ['course' => $course]);
     }
 
     /**
@@ -61,6 +66,17 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $this->authorize('delete', $course);
+
+        foreach ($course->chapters as $chapter) {
+            $chapter->questions()->delete();
+        }
+
+        $course->chapters()->delete();
+        $course->user_course()->delete();
+
+        $course->delete();
+        return back()->with('message', $course->name . ' was deleted Successfully');
     }
+
 }

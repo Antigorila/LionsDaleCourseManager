@@ -61,6 +61,9 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        $this->authorize('delete', Type::class);
+
+        $type->delete();
+        return back()->with('message', $type->type . ' was deleted Successfully');
     }
 }

@@ -61,6 +61,9 @@ class ChapterController extends Controller
      */
     public function destroy(Chapter $chapter)
     {
-        //
+        $this->authorize('delete', Chapter::class);
+
+        $chapter->delete();
+        return back()->with('message', $chapter->title . ' was deleted Successfully');
     }
 }
