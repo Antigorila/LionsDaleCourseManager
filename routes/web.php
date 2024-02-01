@@ -35,8 +35,9 @@ Route::resource('/courses', CourseController::class);
 Route::get('/courses/{course}/showUsers', [CourseController::class, 'showUsers'])->name('courses.showUsers');
 
 Route::resource('/course_users', CourseUserController::class);
-Route::patch('/course_users/{course_users}/updateSeen', [CourseUserController::class, 'updateSeen'])->name('course_users.updateSeen');
-Route::patch('/course_users/{course_users}/updateCompleted', [CourseUserController::class, 'updateCompleted'])->name('course_users.updateCompleted');
+Route::patch('/course_users/{course_user}/update-activity', [CourseUserController::class, 'updateActivity'])->name('course_users.updateActivity');
+Route::patch('/course_users/{course_user}/update-completed', [CourseUserController::class, 'updateCompleted'])->name('course_users.updateCompleted');
+
 
 Route::resource('/questions', QuestionController::class);
 

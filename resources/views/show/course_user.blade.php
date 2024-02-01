@@ -36,7 +36,7 @@
                             <!-- There is fucking big semantic error like...random working everything -->
 
                             <td>
-                                <form action="{{ route('course_users.updateSeen', $kurzus) }}" method="POST">
+                                <form action="{{ route('course_users.updateActivity', $kurzus) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     @if ($kurzus->seen)
@@ -45,19 +45,32 @@
                                         <button class="btn btn-danger rounded-pill px-3" style="width: 100px" type="submit">Unseen</button>
                                     @endif
                                 </form>
-                            </td>
+                            </td>              
                             
                             <td>
                                 <form action="{{ route('course_users.updateCompleted', $kurzus) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
                                     @if ($kurzus->completed)
-                                        <button class="btn btn-success rounded-pill px-3" style="width: 150px" type="submit">Compleeted</button>
+                                        <button class="btn btn-success rounded-pill px-3" style="width: 150px" type="submit">Completed</button>
                                     @else
-                                        <button class="btn btn-danger rounded-pill px-3" style="width: 150px" type="submit">Uncompleeted</button>
+                                        <button class="btn btn-danger rounded-pill px-3" style="width: 150px" type="submit">Uncompleted</button>
                                     @endif
                                 </form>
-                            </td>
+                            </td> 
+
+                            <!--<td>
+                                <form action="{{ route('course_users.updateCompleted', $kurzus) }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    @if ($kurzus->completed)
+                                    <button class="btn btn-success rounded-pill px-3" style="width: 150px" type="submit">Seen</button>
+                                    @else
+                                        <button class="btn btn-danger rounded-pill px-3" style="width: 100px" type="submit">Not Completed</button>
+                                    @endif
+                                </form>
+                            </td>-->
+                            
 
                         </tr>
                         @endforeach

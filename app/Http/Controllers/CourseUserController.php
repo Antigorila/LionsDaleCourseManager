@@ -65,18 +65,36 @@ class CourseUserController extends Controller
     {
         //
     }
+    /*
     public function updateSeen(CourseUser $courseUser)
     {
         $courseUser->seen = $courseUser->seen == true ? false : true;
         $courseUser->update();
         return back();
     }
-    public function updateCompleted(CourseUser $courseUser)
+    */
+    /*
+    public function updateActivity(CourseUser $courseUser)
     {
-        $courseUser->completed = $courseUser->completed == true ? false : true;
+        $courseUser->seen = !$courseUser->seen;
+        $courseUser->update();
+
+        return back();
+    }
+    */
+    public function updateActivity(CourseUser $courseUser)
+    {
+        $courseUser->seen = !$courseUser->seen;
         $courseUser->update();
         return back();
     }
+    public function updateCompleted(CourseUser $courseUser)
+    {
+        $courseUser->completed = !$courseUser->completed;
+        $courseUser->update();
+        return back();
+    }
+
 
     /**
      * Remove the specified resource from storage.
