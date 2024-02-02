@@ -11,7 +11,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Course extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'name',
+        'level',
+        'type_id',
+        'description',
+    ];
     public function type() : BelongsTo
     {
         return $this->belongsTo(Type::class);

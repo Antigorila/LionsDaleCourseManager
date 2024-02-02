@@ -45,7 +45,7 @@ class ChapterController extends Controller
      */
     public function edit(Chapter $chapter)
     {
-        //
+        return view('edit.chapter', ['chapter' => $chapter]); 
     }
 
     /**
@@ -53,7 +53,11 @@ class ChapterController extends Controller
      */
     public function update(UpdateChapterRequest $request, Chapter $chapter)
     {
-        //
+        $this->authorize('update', $chapter);
+
+        $chapter->update($request->all());
+
+        return view('welcome')->with('message', 'Chapter updated Successfully');
     }
 
     /**
@@ -61,9 +65,12 @@ class ChapterController extends Controller
      */
     public function destroy(Chapter $chapter)
     {
-        $this->authorize('delete', Chapter::class);
+        $this->authorize('delete', $chapter);
+
+        $chapter->questions()->delete();
 
         $chapter->delete();
         return back()->with('message', $chapter->title . ' was deleted Successfully');
+        //return view('welcome')->with('message', $chapter->title . ' was deleted Successfully');
     }
 }

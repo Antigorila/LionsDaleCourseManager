@@ -58,7 +58,11 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $this->authorize('update', $course);
+
+        $course->update($request->all());
+
+        return view('welcome')->with('message', 'Course updated Successfully');
     }
 
     /**
@@ -76,7 +80,6 @@ class CourseController extends Controller
         $course->user_course()->delete();
 
         $course->delete();
-        return back()->with('message', $course->name . ' was deleted Successfully');
+        return view('welcome')->with('message', $course->name . ' was deleted Successfully');
     }
-
 }

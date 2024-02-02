@@ -12,7 +12,17 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h3 class="m-2">Chapters:</h3>
+                    @if ($course->chapters->count() > 0)
+                        <h3 class="m-2">Chapters:</h3>
+                    @elseif(Auth::user()->id == 1)
+                        <!-- TODO Do that the admin can add chapters here -->
+                        <form action="#" method="GET" class="m-2">
+                            <button type="submit" class="btn btn-info">Add chapters</button>
+                        </form>
+                    @else
+                        <h3 class="m-2">There is no any chapter yet...</h3>
+                    @endif
+                    
                     @foreach($course->chapters as $chapter)
                     <div class="text-dark-emphasis bg-dark border rounded-3">
                         <div class="card m-1">
@@ -21,18 +31,18 @@
                                 <p class="card-text">{{ $chapter->content }}</p>
                                 <div class="card">
                                     <div class="card-body col-12 rounded bg-dark">
-                                    @foreach ($chapter->questions as $question)
-                                        <h5 class="card-title text-white">{{ $question->question }}</h5>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                              <span class="input-group-text">Answer:</span>
+                                        @foreach ($chapter->questions as $index => $question)
+                                            <h5 class="card-title text-white">{{ $question->question }}</h5>
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">Answer:</span>
+                                                </div>
+                                                <input type="text" class="form-control" id="answer{{ $index }}" aria-describedby="basic-addon1">
                                             </div>
-                                            <input type="text" class="form-control" aria-describedby="basic-addon1">
-                                        </div>
-                                        <button class="btn btn-info m-2" onclick="checkAnswer()">Check</button>  
-                                        <button class="btn btn-info m-2" onclick="showAnswer()">Show answer</button>  
-                                        <hr class="m-2 text-white">                                          
-                                    @endforeach
+                                            <button class="btn btn-info m-2 check-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Check</button>  
+                                            <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button>  
+                                            <hr class="m-2 text-white">                                          
+                                        @endforeach
                                     </div>
                                 </div> 
                             </div>
@@ -47,21 +57,25 @@
     </div>
 </div>
 <script>
-    function showAnswer() {
-        var answer = "{{ $question->answer }}";
-        alert(answer);
-    }
+    document.addEventListener('click', function(event) {
+        var target = event.target;
+        
+        if (target.classList.contains('check-answer')) {
+            var index = target.getAttribute('data-index');
+            var userAnswer = document.querySelector('#answer' + index).value;
+            var correctAnswer = target.getAttribute('data-correct-answer');
 
-    function checkAnswer() {
-        var userAnswer = document.querySelector('.form-control').value;
-        var correctAnswer = "{{ $question->answer }}";
-
-        if (userAnswer === correctAnswer) {
-            alert('Correct!');
-        } else {
-            alert('Wrong!');
+            if (userAnswer === correctAnswer) {
+                alert('Correct!');
+            } else {
+                alert('Wrong!');
+            }
         }
-    }
-</script>
 
+        if (target.classList.contains('show-answer')) {
+            var correctAnswer = target.getAttribute('data-correct-answer');
+            alert(correctAnswer);
+        }
+    });
+</script>
 @endsection

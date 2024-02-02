@@ -10,7 +10,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Chapter extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'title',
+        'content',
+        'course_id',
+        'description',
+    ];
     public function questions() : HasMany
     {
         return $this->hasMany(Question::class);
