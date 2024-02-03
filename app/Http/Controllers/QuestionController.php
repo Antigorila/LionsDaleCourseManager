@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Question;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
+use App\Models\Chapter;
 
 class QuestionController extends Controller
 {
@@ -23,15 +24,24 @@ class QuestionController extends Controller
     {
         //
     }
+    public function createView(Chapter $chapter)
+    {
+        return view('create.question', ['chapter' => $chapter]);
+    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        $question = Question::create([
+            'question' => $request->input('question'),
+            'answer' => $request->input('answer'),
+            'chapter_id' => $request->input('chapter_id'),
+        ]);
+        $question->save();
+        return back()->with('message', 'Question created');
     }
-
     /**
      * Display the specified resource.
      */
@@ -51,9 +61,14 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $this->authorize('update', $question);
+
+        $question->update($request->all());
+
+        return back()->with('message', 'Course updated Successfully');
     }
 
     /**

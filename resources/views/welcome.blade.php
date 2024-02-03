@@ -22,8 +22,7 @@
                             </form>
                             @else
                             <!-- TODO: toastr message after Apply -->
-                            <!-- TODO: do the edit part of the course, add edit chapters and question also dont forget to bind the two button on the navbar -->
-                            <!-- TODO: do the add new question, add new course, add new chapter, delete question, modify question, modify chapter -->
+                            <!-- TODO: do the edit part of the course, also dont forget to bind the two button on the navbar -->
                             <form action="{{ route('course_users.store') }}" method="POST" class="m-2">
                                 @csrf
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">

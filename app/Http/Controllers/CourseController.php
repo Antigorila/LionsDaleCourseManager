@@ -21,7 +21,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.course');
     }
 
     /**
@@ -29,9 +29,16 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        //
-    }
+        $course = Course::create([
+            'name' => $request->input('name'),
+            'level' => $request->input('level'),
+            'type_id' => $request->input('type_id'),
+            'description' => $request->input('description'),
+        ]);
 
+        $course->save();
+        return back()->with('message', 'Course created');
+    }
     /**
      * Display the specified resource.
      */

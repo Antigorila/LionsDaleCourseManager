@@ -32,10 +32,10 @@
                     <ul class="navbar-nav me-auto">
                         @if (Auth::check() && Auth::user()->id == 1)
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Manage Types</a>
+                            <a class="nav-link" href="{{ route('types.index') }}">Manage Types</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Add new course</a>
+                            <a class="nav-link" href="{{ route('courses.create') }}">Add new course</a>    
                         </li>
                         @endif
                     </ul>

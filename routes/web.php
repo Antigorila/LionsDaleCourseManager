@@ -30,6 +30,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/chapters', ChapterController::class);
+Route::get('/chapters/createView/{course}', [ChapterController::class, 'createView'])->name('chapters.createView');
+
 
 Route::resource('/courses', CourseController::class);
 Route::get('/courses/{course}/showUsers', [CourseController::class, 'showUsers'])->name('courses.showUsers');
@@ -40,6 +42,7 @@ Route::patch('/course_users/{course_user}/update-completed', [CourseUserControll
 
 
 Route::resource('/questions', QuestionController::class);
+Route::get('/questions/createView/{chapter}', [QuestionController::class, 'createView'])->name('questions.createView');
 
 Route::resource('/schools', SchoolController::class);
 

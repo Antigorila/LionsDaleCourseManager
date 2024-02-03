@@ -15,9 +15,8 @@
                     @if ($course->chapters->count() > 0)
                         <h3 class="m-2">Chapters:</h3>
                     @elseif(Auth::user()->id == 1)
-                        <!-- TODO Do that the admin can add chapters here -->
-                        <form action="#" method="GET" class="m-2">
-                            <button type="submit" class="btn btn-info">Add chapters</button>
+                        <form action="{{ route('chapters.createView', $course) }}" method="GET">
+                            <button type="submit" class="btn btn-info m-2">Add chapter</button>
                         </form>
                     @else
                         <h3 class="m-2">There is no any chapter yet...</h3>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Chapter;
 use App\Http\Requests\StoreChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
+use App\Models\Course;
 
 class ChapterController extends Controller
 {
@@ -19,9 +20,13 @@ class ChapterController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Course $course)
     {
         //
+    }
+    public function createView(Course $course)
+    {
+        return view('create.chapter', ['course' => $course]);
     }
 
     /**
@@ -29,7 +34,14 @@ class ChapterController extends Controller
      */
     public function store(StoreChapterRequest $request)
     {
-        //
+        $chapter = Chapter::create([
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+            'course_id' => $request->input('course_id'),
+        ]);
+
+        $chapter->save();
+        return back()->with('message', 'Chapter created');
     }
 
     /**
@@ -39,7 +51,6 @@ class ChapterController extends Controller
     {
         //
     }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -70,7 +81,6 @@ class ChapterController extends Controller
         $chapter->questions()->delete();
 
         $chapter->delete();
-        return back()->with('message', $chapter->title . ' was deleted Successfully');
-        //return view('welcome')->with('message', $chapter->title . ' was deleted Successfully');
+        return view('welcome')->with('message', $chapter->title . ' was deleted Successfully');
     }
 }
