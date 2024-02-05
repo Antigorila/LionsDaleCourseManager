@@ -22,7 +22,6 @@
                             </form>
                             @else
                             <!-- TODO: toastr message after Apply -->
-                            <!-- TODO: do the edit part of the course, also dont forget to bind the two button on the navbar -->
                             <form action="{{ route('course_users.store') }}" method="POST" class="m-2">
                                 @csrf
                                 <input type="hidden" name="course_id" value="{{ $course->id }}">
@@ -68,11 +67,15 @@
                         <p class="text-white">{{ $school->contact_name }}</p>
                         <p class="text-white">{{ $school->contact_email }}</p>
                         <p class="text-white">{{ $school->address }}</p>
+                        <p class="text-white">Students in school: {{ $school->student->count() }}</p>
                     </div>
                     @if(Auth::check() && Auth::user()->id == 1)
                         <div class="d-flex">     
                             <form action="{{ route('schools.edit', $school) }}" method="GET" class="m-2">
                                 <button type="submit" class="btn btn-info">Edit</button>
+                            </form>
+                            <form action="{{ route('schools.show', $school) }}" method="GET" class="m-2">
+                                <button type="submit" class="btn btn-info">Show students</button>
                             </form>
                             <form action="{{ route('schools.destroy', $school) }}" method="POST" class="m-2">
                                 @csrf

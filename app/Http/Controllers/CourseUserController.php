@@ -65,34 +65,17 @@ class CourseUserController extends Controller
     {
         //
     }
-    /*
-    public function updateSeen(CourseUser $courseUser)
-    {
-        $courseUser->seen = $courseUser->seen == true ? false : true;
-        $courseUser->update();
-        return back();
-    }
-    */
-    /*
     public function updateActivity(CourseUser $courseUser)
     {
         $courseUser->seen = !$courseUser->seen;
         $courseUser->update();
-
-        return back();
-    }
-    */
-    public function updateActivity(CourseUser $courseUser)
-    {
-        $courseUser->seen = !$courseUser->seen;
-        $courseUser->update();
-        return back();
+        return back()->with('message', 'Seen updated');
     }
     public function updateCompleted(CourseUser $courseUser)
     {
         $courseUser->completed = !$courseUser->completed;
         $courseUser->update();
-        return back();
+        return back()->with('message', 'Compleeted updated');
     }
 
 

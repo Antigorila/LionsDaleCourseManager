@@ -37,7 +37,7 @@ class SchoolController extends Controller
      */
     public function show(School $school)
     {
-        //
+        return view('show.studentsInSchool', ['school' => $school]);
     }
 
     /**
@@ -67,6 +67,15 @@ class SchoolController extends Controller
     public function destroy(School $school)
     {
         $this->authorize('delete', $school);
+        
+        
+        foreach ($school->student as $student) {
+            foreach ($student->user_course as $user_course ) {
+                $user_course->delete();
+            }
+        }
+        
+        $school->student()->delete();
         $school->delete();
 
         return back()->with('message', $school->name . ' was deleted Successfully');

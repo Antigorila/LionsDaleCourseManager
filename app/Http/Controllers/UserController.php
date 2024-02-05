@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $students = User::all();
+        return view('show.students');
     }
 
     /**
@@ -20,7 +22,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.students');
     }
 
     /**
@@ -34,9 +36,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(School $school)
     {
-        //
+       
+        
     }
 
     /**
@@ -59,14 +62,16 @@ class UserController extends Controller
     {
         $user->activity = $user->activity == true ? false : true;
         $user->update();
-        return back();
+        return back()->with('message', 'Activity updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $student)
     {
-        
+        $this->authorize('delete', $student);
+        $student->delete();
+        return back()->with('message', 'Delete was Successfully');
     }
 }

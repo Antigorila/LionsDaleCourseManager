@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->boolean('activity')->default(true); 
-            $table->integer('school_id')->default(1)->index('school_id');
+            $table->integer('school_id')->default(1)->index('school_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'dev@gmail.com',
             'password' => '123456',
             'activity' => true,
+            'school_id' => null
         ]);
 
         $this->call([
