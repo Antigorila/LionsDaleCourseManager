@@ -13,7 +13,7 @@ class CourseUserPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class CourseUserPolicy
      */
     public function view(User $user, CourseUser $courseUser): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class CourseUserPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -37,7 +37,7 @@ class CourseUserPolicy
      */
     public function update(User $user, CourseUser $courseUser): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ class CourseUserPolicy
      */
     public function delete(User $user, CourseUser $courseUser): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class CourseUserPolicy
      */
     public function restore(User $user, CourseUser $courseUser): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -61,6 +61,6 @@ class CourseUserPolicy
      */
     public function forceDelete(User $user, CourseUser $courseUser): bool
     {
-        //
+        return $user->id === 1;
     }
 }

@@ -9,7 +9,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Question extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'question',
+        'answer',
+        'chapter_id',
+    ];
     public function user_course() : BelongsTo
     {
         return $this->belongsTo(Chapter::class);

@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Type extends Model
 {
     use HasFactory;
-
+    protected $fillable = [
+        'type',
+        'slug'
+    ];
     public function course(): HasMany
     {
         return $this->hasMany(Course::class);

@@ -45,7 +45,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        //
+        return view('edit.school', ['school' => $school]);
     }
 
     /**
@@ -53,14 +53,22 @@ class SchoolController extends Controller
      */
     public function update(UpdateSchoolRequest $request, School $school)
     {
-        //
+        $this->authorize('update', $school);
+
+        $school->update($request->all());
+
+        return view('welcome')->with('message', 'School updated Successfully');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(School $school)
     {
-        //
+        $this->authorize('delete', $school);
+        $school->delete();
+
+        return back()->with('message', $school->name . ' was deleted Successfully');
     }
 }

@@ -85,7 +85,7 @@
                                         <option value="{{ $school->id }}">{{ $school->name }}</option>
                                       @endforeach
                                     </select>
-                                  </div>      
+                                </div>      
                             </div>
                         </div>
 

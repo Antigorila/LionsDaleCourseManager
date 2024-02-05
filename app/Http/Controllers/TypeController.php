@@ -13,7 +13,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('show.type');
     }
 
     /**
@@ -21,7 +21,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.type');
     }
 
     /**
@@ -29,7 +29,13 @@ class TypeController extends Controller
      */
     public function store(StoreTypeRequest $request)
     {
-        //
+        $type = Type::create([
+            'type' => $request->input('type'),
+            'slug' => $request->input('slug'),
+        ]);
+
+        $type->save();
+        return back()->with('message', 'Type created');
     }
 
     /**
@@ -45,7 +51,7 @@ class TypeController extends Controller
      */
     public function edit(Type $type)
     {
-        //
+        return view('edit.type', ['type' => $type]);
     }
 
     /**
@@ -53,7 +59,11 @@ class TypeController extends Controller
      */
     public function update(UpdateTypeRequest $request, Type $type)
     {
-        //
+        $this->authorize('update', $type);
+
+        $type->update($request->all());
+
+        return view('show.type')->with('message', 'Course updated Successfully');
     }
 
     /**
@@ -63,4 +73,6 @@ class TypeController extends Controller
     {
         //
     }
+
+
 }

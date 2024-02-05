@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -54,11 +55,18 @@ class UserController extends Controller
         //
     }
 
+    public function updateActivity(User $user)
+    {
+        $user->activity = $user->activity == true ? false : true;
+        $user->update();
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        
     }
 }

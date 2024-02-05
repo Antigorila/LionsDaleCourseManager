@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('questions', function (Blueprint $table) {
-            //
+            $table->foreign(['chapter_id'], 'questions_ibfk_4')->references(['id'])->on('chapters');
         });
     }
 };

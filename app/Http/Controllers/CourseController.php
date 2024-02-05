@@ -21,7 +21,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.course');
     }
 
     /**
@@ -29,9 +29,16 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        //
-    }
+        $course = Course::create([
+            'name' => $request->input('name'),
+            'level' => $request->input('level'),
+            'type_id' => $request->input('type_id'),
+            'description' => $request->input('description'),
+        ]);
 
+        $course->save();
+        return back()->with('message', 'Course created');
+    }
     /**
      * Display the specified resource.
      */
@@ -40,12 +47,17 @@ class CourseController extends Controller
         return view('show.course', ['course' => $course]);
     }
 
+    public function showUsers(Course $course)
+    {
+        return view('show.course_user', ['course' => $course]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Course $course)
     {
-        //
+        return view('edit.course', ['course' => $course]);
     }
 
     /**
@@ -53,7 +65,11 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $this->authorize('update', $course);
+
+        $course->update($request->all());
+
+        return view('welcome')->with('message', 'Course updated Successfully');
     }
 
     /**
@@ -61,6 +77,16 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $this->authorize('delete', $course);
+
+        foreach ($course->chapters as $chapter) {
+            $chapter->questions()->delete();
+        }
+
+        $course->chapters()->delete();
+        $course->user_course()->delete();
+
+        $course->delete();
+        return view('welcome')->with('message', $course->name . ' was deleted Successfully');
     }
 }

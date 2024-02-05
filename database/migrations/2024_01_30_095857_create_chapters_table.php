@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->integer('course_id')->default(1)->index('course_id');
-            $table->integer('question_id')->default(1)->index('question_id');
             $table->timestamps();
         });
     }

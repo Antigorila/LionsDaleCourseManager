@@ -30,7 +30,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if (Auth::check() && Auth::user()->id == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('types.index') }}">Manage Types</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('courses.create') }}">Add new course</a>    
+                        </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -67,17 +74,13 @@
                                 </div>
                             </li>
                         @endguest
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Types</a>
-                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
-</body>
+    <main class="py-4">
+        @yield('content')
+    </main>
+    </body>
 </html>

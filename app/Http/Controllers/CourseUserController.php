@@ -30,8 +30,17 @@ class CourseUserController extends Controller
      */
     public function store(StoreCourseUserRequest $request)
     {
-        //
+        $courseUser = CourseUser::create([
+            'user_id' => auth()->user()->id,
+            'course_id' => $request->input('course_id'),
+            'seen' => false,
+            'completed' => false,
+        ]);
+
+        $courseUser->save();
+        return back()->with('message', 'Applied to course');
     }
+
 
     /**
      * Display the specified resource.
@@ -56,12 +65,45 @@ class CourseUserController extends Controller
     {
         //
     }
+    /*
+    public function updateSeen(CourseUser $courseUser)
+    {
+        $courseUser->seen = $courseUser->seen == true ? false : true;
+        $courseUser->update();
+        return back();
+    }
+    */
+    /*
+    public function updateActivity(CourseUser $courseUser)
+    {
+        $courseUser->seen = !$courseUser->seen;
+        $courseUser->update();
+
+        return back();
+    }
+    */
+    public function updateActivity(CourseUser $courseUser)
+    {
+        $courseUser->seen = !$courseUser->seen;
+        $courseUser->update();
+        return back();
+    }
+    public function updateCompleted(CourseUser $courseUser)
+    {
+        $courseUser->completed = !$courseUser->completed;
+        $courseUser->update();
+        return back();
+    }
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(CourseUser $courseUser)
     {
-        //
+        $this->authorize('delete', CourseUser::class);
+
+        $courseUser->delete();
+        return back()->with('message', $courseUser->name . ' was deleted Successfully');
     }
 }

@@ -20,7 +20,6 @@ class ChapterFactory extends Factory
             'title' => fake()->words(2, true),
             'content' => fake()->paragraphs(15, true),
             'course_id' => fake()->numberBetween(1,5),
-            'question_id' => fake()->numberBetween(1,50),
         ];
     }
 }

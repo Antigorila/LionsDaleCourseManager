@@ -28,10 +28,25 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::resource('/chapters', ChapterController::class);
+Route::get('/chapters/createView/{course}', [ChapterController::class, 'createView'])->name('chapters.createView');
+
+
 Route::resource('/courses', CourseController::class);
+Route::get('/courses/{course}/showUsers', [CourseController::class, 'showUsers'])->name('courses.showUsers');
+
 Route::resource('/course_users', CourseUserController::class);
+Route::patch('/course_users/{course_user}/update-activity', [CourseUserController::class, 'updateActivity'])->name('course_users.updateActivity');
+Route::patch('/course_users/{course_user}/update-completed', [CourseUserController::class, 'updateCompleted'])->name('course_users.updateCompleted');
+
+
 Route::resource('/questions', QuestionController::class);
+Route::get('/questions/createView/{chapter}', [QuestionController::class, 'createView'])->name('questions.createView');
+
 Route::resource('/schools', SchoolController::class);
+
 Route::resource('/types', TypeController::class);
+
 Route::resource('/users', UserController::class);
+Route::patch('/users/{user}/updateActivity', [UserController::class, 'updateActivity'])->name('users.updateActivity');

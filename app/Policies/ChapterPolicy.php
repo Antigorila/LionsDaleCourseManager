@@ -13,7 +13,7 @@ class ChapterPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class ChapterPolicy
      */
     public function view(User $user, Chapter $chapter): bool
     {
-        //
+        return true;
     }
 
     /**
@@ -29,7 +29,7 @@ class ChapterPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -37,7 +37,7 @@ class ChapterPolicy
      */
     public function update(User $user, Chapter $chapter): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -45,7 +45,7 @@ class ChapterPolicy
      */
     public function delete(User $user, Chapter $chapter): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -53,7 +53,7 @@ class ChapterPolicy
      */
     public function restore(User $user, Chapter $chapter): bool
     {
-        //
+        return $user->id === 1;
     }
 
     /**
@@ -61,6 +61,6 @@ class ChapterPolicy
      */
     public function forceDelete(User $user, Chapter $chapter): bool
     {
-        //
+        return $user->id === 1;
     }
 }
