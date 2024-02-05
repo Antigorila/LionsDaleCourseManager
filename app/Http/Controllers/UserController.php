@@ -68,10 +68,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $student)
+    public function destroy(User $user)
     {
-        $this->authorize('delete', $student);
-        $student->delete();
+       //$this->authorize('delete', $student);
+       //$user = User::find($user);
+       //dd($user);
+        $user->delete();
         return back()->with('message', 'Delete was Successfully');
     }
+
+
 }
