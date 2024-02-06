@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
             ChapterSeeder::class,
             QuestionSeeder::class,
             CourseUserSeeder::class,
+            DoneTaskSeeder::class,
         ]);
     }
 }

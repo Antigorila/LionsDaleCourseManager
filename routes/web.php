@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseUserController;
+use App\Http\Controllers\DoneTaskController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\TypeController;
@@ -50,3 +51,5 @@ Route::resource('/types', TypeController::class);
 
 Route::resource('/users', UserController::class);
 Route::patch('/users/{user}/updateActivity', [UserController::class, 'updateActivity'])->name('users.updateActivity');
+
+Route::resource('/done_tasks', DoneTaskController::class);

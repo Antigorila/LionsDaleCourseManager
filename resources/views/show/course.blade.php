@@ -11,7 +11,7 @@
                         <div class="grid-container">
                           <p class="card-text">{{ $course->description }}</p>
                           <div class="littlecard">
-                            <span>{{ $course->name }}</span>
+                            <h5>Chapters in {{ $course->name }}</h5>
                             <div class="card__container">
                                 @if ($course->chapters->count() > 0)
                                     @foreach ($course->chapters as $chapter)
@@ -45,14 +45,34 @@
                                     <div class="card-body col-12 rounded bg-dark">
                                         @foreach ($chapter->questions as $index => $question)
                                             <h5 class="card-title text-white">{{ $question->question }}</h5>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">Answer:</span>
+                                            @if (Auth::user()->doneTasks()->pluck('question_id')->contains($question->id))
+
+                                            <div class="card text-white bg-success mb-3">
+                                                <div class="card-body">
+                                                    <h5>This question already answered!</h5>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Answer:</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" id="answer{{ $index }}" aria-describedby="basic-addon1" placeholder="{{ $question->question }}">
+                                                    </div>
+                                                    <button class="btn btn-info m-2 check-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Check</button>  
+                                                    <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button> 
                                                 </div>
-                                                <input type="text" class="form-control" id="answer{{ $index }}" aria-describedby="basic-addon1">
-                                            </div>
-                                            <button class="btn btn-info m-2 check-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Check</button>  
-                                            <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button>  
+                                              </div>
+                                            @else
+                                                <div class="col">
+                                                    <form action="{{ route('done_tasks.store') }}" method="POST">
+                                                        @csrf
+                                                        @method('POST')
+                                                        <input type="text" class="form-control" id="answer" name="answer" aria-describedby="basic-addon1" placeholder="Answer">
+                                                        <input hidden name="question_id" id="question_id" value="{{ $question->id }}">
+                                                        <input hidden name="course_id" id="course_id" value="{{ $course->id }}">
+                                                        <button type="submit" class="btn btn-info m-2 check-answer">Check</button>  
+                                                    </form>        
+                                                </div>
+                                                <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button>    
+                                            @endif
                                             <hr class="m-2 text-white">                                          
                                         @endforeach
                                     </div>
