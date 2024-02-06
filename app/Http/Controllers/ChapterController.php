@@ -68,7 +68,7 @@ class ChapterController extends Controller
 
         $chapter->update($request->all());
 
-        return view('welcome')->with('message', 'Chapter updated Successfully');
+        return back()->with('message', 'Chapter updated Successfully');
     }
 
     /**
@@ -81,6 +81,6 @@ class ChapterController extends Controller
         $chapter->questions()->delete();
 
         $chapter->delete();
-        return view('welcome')->with('message', $chapter->title . ' was deleted Successfully');
+        return back()->with('message', $chapter->title . ' was deleted Successfully');
     }
 }

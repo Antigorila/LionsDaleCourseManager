@@ -63,7 +63,7 @@ class TypeController extends Controller
 
         $type->update($request->all());
 
-        return view('show.type')->with('message', 'Course updated Successfully');
+        return back()->with('message', 'Course updated Successfully');
     }
 
     /**

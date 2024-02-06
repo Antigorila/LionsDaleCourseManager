@@ -78,7 +78,7 @@ class CourseController extends Controller
 
         $course->update($request->all());
 
-        return view('welcome')->with('message', 'Course updated Successfully');
+        return back()->with('message', 'Course updated Successfully');
     }
 
     /**
@@ -96,6 +96,6 @@ class CourseController extends Controller
         $course->user_course()->delete();
 
         $course->delete();
-        return view('welcome')->with('message', $course->name . ' was deleted Successfully');
+        return back()->with('message', $course->name . ' was deleted Successfully');
     }
 }

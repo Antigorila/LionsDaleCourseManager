@@ -57,7 +57,7 @@ class SchoolController extends Controller
 
         $school->update($request->all());
 
-        return view('welcome')->with('message', 'School updated Successfully');
+        return back()->with('message', 'School updated Successfully');
     }
 
 

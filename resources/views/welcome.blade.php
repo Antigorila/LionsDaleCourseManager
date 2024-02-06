@@ -1,5 +1,10 @@
 @section('content')
 @extends('layouts.app')
+@if (Session::has('message'))
+<script>
+    toastr.success("{{Session::get('message')}}");
+</script>
+@endif
 @foreach (App\Models\Course::all() as $course)
 <div class="m-4"> 
     <div class="card bg-dark">
