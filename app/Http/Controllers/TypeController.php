@@ -35,7 +35,9 @@ class TypeController extends Controller
         ]);
 
         $type->save();
-        return back()->with('message', 'Type created');
+
+        toastr()->success('Type created!');
+        return view('welcome');
     }
 
     /**
@@ -63,7 +65,8 @@ class TypeController extends Controller
 
         $type->update($request->all());
 
-        return back()->with('message', 'Course updated Successfully');
+        toastr()->info($type->type .' updated!');
+        return back();
     }
 
     /**
@@ -71,8 +74,6 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
-        //
+        //Its better if you wont delete this, trust me...you dont want to delete all the courses, chapter, question with this
     }
-
-
 }

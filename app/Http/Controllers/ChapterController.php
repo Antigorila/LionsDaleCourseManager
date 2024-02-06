@@ -41,7 +41,8 @@ class ChapterController extends Controller
         ]);
 
         $chapter->save();
-        return back()->with('message', 'Chapter created');
+        toastr()->success('Chapter created!');
+        return back();
     }
 
     /**
@@ -68,7 +69,8 @@ class ChapterController extends Controller
 
         $chapter->update($request->all());
 
-        return back()->with('message', 'Chapter updated Successfully');
+        toastr()->info('Chapter updated Successfully');
+        return back();
     }
 
     /**
@@ -81,6 +83,7 @@ class ChapterController extends Controller
         $chapter->questions()->delete();
 
         $chapter->delete();
-        return back()->with('message', $chapter->title . ' was deleted Successfully');
+        toastr()->error($chapter->title . ' deleted!');
+        return back();
     }
 }

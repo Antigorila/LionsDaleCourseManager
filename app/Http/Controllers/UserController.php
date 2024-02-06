@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Just...login
     }
 
     /**
@@ -38,8 +38,7 @@ class UserController extends Controller
      */
     public function show(School $school)
     {
-       
-        
+       //Why would you do that...
     }
 
     /**
@@ -62,7 +61,8 @@ class UserController extends Controller
     {
         $user->activity = $user->activity == true ? false : true;
         $user->update();
-        return back()->with('message', 'Activity updated');
+        toastr()->info('Activity changed.');
+        return back();
     }
 
     /**
@@ -70,12 +70,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-       //$this->authorize('delete', $student);
-       //$user = User::find($user);
-       //dd($user);
+        foreach ($user->user_course as $user_course) {
+            $user_course->delete();
+        }
+
         $user->delete();
-        return back()->with('message', 'Delete was Successfully');
+        toastr()->error('Good bye ' . $user->fullname);
+        return back();
     }
-
-
 }

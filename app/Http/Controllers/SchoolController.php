@@ -13,7 +13,7 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
+        return view('show.schools');
     }
 
     /**
@@ -21,15 +21,24 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        //
+        return view('create.school');
     }
 
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(StoreSchoolRequest $request)
     {
-        //
+        $school = School::create([
+            'name' => $request->input('name'),
+            'contact_name' => $request->input('contact_name'),
+            'contact_email' => $request->input('contact_email'),
+            'address' => $request->input('address')
+        ]);
+        $school->save();
+        toastr()->success('School created!');
+        return view('welcome');  
     }
 
     /**
@@ -57,7 +66,8 @@ class SchoolController extends Controller
 
         $school->update($request->all());
 
-        return back()->with('message', 'School updated Successfully');
+        toastr()->info( $school->name . ' updated!');
+        return back();
     }
 
 
@@ -78,6 +88,7 @@ class SchoolController extends Controller
         $school->student()->delete();
         $school->delete();
 
-        return back()->with('message', $school->name . ' was deleted Successfully');
+        toastr()->error($school->name .' deleted!');
+        return view('show.schools');
     }
 }

@@ -38,7 +38,8 @@ class CourseController extends Controller
         ]);
 
         $course->save();
-        return back()->with('message', 'Course created');
+        toastr()->success('Event created!');
+        return back();
     }
     /**
      * Display the specified resource.
@@ -78,7 +79,8 @@ class CourseController extends Controller
 
         $course->update($request->all());
 
-        return back()->with('message', 'Course updated Successfully');
+        toastr()->info('Course updated.');
+        return back();
     }
 
     /**
@@ -96,6 +98,7 @@ class CourseController extends Controller
         $course->user_course()->delete();
 
         $course->delete();
-        return back()->with('message', $course->name . ' was deleted Successfully');
+        toastr()->error($course->name . ' deleted!');
+        return view('welcome');
     }
 }

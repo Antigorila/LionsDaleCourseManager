@@ -40,7 +40,8 @@ class QuestionController extends Controller
             'chapter_id' => $request->input('chapter_id'),
         ]);
         $question->save();
-        return back()->with('message', 'Question created');
+        toastr()->success('Question created!');
+        return back();
     }
     /**
      * Display the specified resource.
@@ -68,7 +69,8 @@ class QuestionController extends Controller
 
         $question->update($request->all());
 
-        return back()->with('message', 'Course updated Successfully');
+        toastr()->info('Course updated!');
+        return back();
     }
 
     /**
@@ -79,6 +81,7 @@ class QuestionController extends Controller
         $this->authorize('delete', Question::class);
 
         $question->delete();
-        return back()->with('message', $question->question . ' was deleted Successfully');
+        toastr()->error( $question->questionn .  ' deleted!');
+        return view('welcome');
     }
 }

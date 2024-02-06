@@ -3,8 +3,7 @@
 <div class="m-4">
     <div class="text-dark-emphasis bg-dark border rounded-3 border-dark">
         <div class="m-2 text-white border-dark">
-            <h4 class="card-title">Students on the course</h4>
-            <div class="card">          
+            <h4 class="card-title">Students on the course</h4>        
                 <table class="table">
                     <thead>
                         <tr>
@@ -13,6 +12,7 @@
                             <th scope="col">Activity</th>
                             <th scope="col">Seen course</th>
                             <th scope="col">Completed course</th>
+                            <th scope="col">Suspend</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -20,7 +20,6 @@
                         <tr>
                             <th scope="row">{{ $kurzus->student->id }}</th>
                             <td>{{ $kurzus->student->fullname }}</td>
-
                             <td>
                             <form action="{{ route('users.updateActivity', $kurzus->student) }}" method="POST">
                                 @csrf
@@ -56,11 +55,18 @@
                                     @endif
                                 </form>
                             </td> 
+
+                            <td>
+                                <form action="{{ route('course_users.destroy', $kurzus) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger rounded-pill px-3" style="width: 100px" type="submit">Suspend</button>
+                                </form>
+                            </td> 
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
         </div>
       </div>
     </div>

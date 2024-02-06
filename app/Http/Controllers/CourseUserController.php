@@ -38,7 +38,8 @@ class CourseUserController extends Controller
         ]);
 
         $courseUser->save();
-        return back()->with('message', 'Applied to course');
+        toastr()->success('Applied to course!');
+        return back();
     }
 
 
@@ -69,13 +70,15 @@ class CourseUserController extends Controller
     {
         $courseUser->seen = !$courseUser->seen;
         $courseUser->update();
-        return back()->with('message', 'Seen updated');
+        toastr()->info('Activity has been modified.');
+        return back();
     }
     public function updateCompleted(CourseUser $courseUser)
     {
         $courseUser->completed = !$courseUser->completed;
         $courseUser->update();
-        return back()->with('message', 'Compleeted updated');
+        toastr()->info('Completed has been modified.');
+        return back();
     }
 
 
@@ -84,9 +87,10 @@ class CourseUserController extends Controller
      */
     public function destroy(CourseUser $courseUser)
     {
-        $this->authorize('delete', CourseUser::class);
+        $this->authorize('delete', $courseUser);
 
         $courseUser->delete();
-        return back()->with('message', $courseUser->name . ' was deleted Successfully');
+        toastr()->error('Delete was successful!');
+        return view('welcome');
     }
 }
