@@ -8,3 +8,53 @@
 @import 'bootstrap/scss/bootstrap';
 
 @import '../css/app.css';
+
+.littlecard {
+    width: 250px;
+    border-radius: 15px;
+    background: rgb(27, 26, 26);
+    color: white;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .element {
+    color: grey;
+    font-size: .8em;
+    padding: 6px 15px;
+    border-left: 2px solid grey;
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: #54B4D3;
+    border-left: 2px solid #8cb4ff;
+    color: black;
+  }
+  
+  .element:hover:not(.active) {
+    color: #54B4D3;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-gap: 10px;
+    align-items: center;
+  }
+  
+  .card-text {
+    grid-column: 1;
+  }
+  
+  .littlecard {
+    grid-column: 2;
+  }
+  
+/*
+  https://uiverse.io/mrhyddenn/tricky-baboon-12
+*/

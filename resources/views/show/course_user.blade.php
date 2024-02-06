@@ -25,9 +25,9 @@
                                 @csrf
                                 @method('PATCH')
                                 @if ($kurzus->student->activity)
-                                    <button class="btn btn-info rounded-pill px-3" style="width: 100px" type="submit">Active</button>
+                                    <button class="btn btn-info px-3" style="width: 100px" type="submit">Active</button>
                                 @else
-                                    <button class="btn btn-dark rounded-pill px-3" style="width: 100px" type="submit">Inactive</button>
+                                    <button class="btn btn-dark px-3" style="width: 100px" type="submit">Inactive</button>
                                 @endif
                             </form>
                             </td>
@@ -37,9 +37,9 @@
                                     @csrf
                                     @method('PATCH')
                                     @if ($kurzus->seen)
-                                        <button class="btn btn-info rounded-pill px-3" style="width: 100px" type="submit">Seen</button>
+                                        <button class="btn btn-info px-3" style="width: 100px" type="submit">Seen</button>
                                     @else
-                                        <button class="btn btn-dark rounded-pill px-3" style="width: 100px" type="submit">Unseen</button>
+                                        <button class="btn btn-dark px-3" style="width: 100px" type="submit">Unseen</button>
                                     @endif
                                 </form>
                             </td>              
@@ -49,9 +49,9 @@
                                     @csrf
                                     @method('PATCH')
                                     @if ($kurzus->completed)
-                                        <button class="btn btn-info rounded-pill px-3" style="width: 150px" type="submit">Completed</button>
+                                        <button class="btn btn-info px-3" style="width: 150px" type="submit">Completed</button>
                                     @else
-                                        <button class="btn btn-dark rounded-pill px-3" style="width: 150px" type="submit">Uncompleted</button>
+                                        <button class="btn btn-dark px-3" style="width: 150px" type="submit">Uncompleted</button>
                                     @endif
                                 </form>
                             </td> 
@@ -60,7 +60,7 @@
                                 <form action="{{ route('course_users.destroy', $kurzus) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger rounded-pill px-3" style="width: 100px" type="submit">Suspend</button>
+                                    <button class="btn btn-danger px-3" style="width: 100px" type="submit">Suspend</button>
                                 </form>
                             </td> 
                         </tr>

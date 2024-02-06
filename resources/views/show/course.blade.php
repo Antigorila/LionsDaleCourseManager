@@ -8,8 +8,21 @@
                 <div class="col">
                     <h3 class="m-2">{{ $course->name }}</h3>
                     <div class="card-body">
-                        <p class="card-text">{{ $course->description }}</p>
-                    </div>
+                        <div class="grid-container">
+                          <p class="card-text">{{ $course->description }}</p>
+                          <div class="littlecard">
+                            <span>{{ $course->name }}</span>
+                            <div class="card__container">
+                                @if ($course->chapters->count() > 0)
+                                    @foreach ($course->chapters as $chapter)
+                                    <p class="element" onclick="scroll_to_div('{{ $chapter->id }}')">{{ $chapter->title }}</p>
+                                    @endforeach
+                                @else
+                                    <p class="element active">This chapter is empty</p> 
+                                @endif
+                            </div>
+                        </div>
+                    </div>          
                 </div>
                 <div class="col">
                     @if ($course->chapters->count() > 0)
@@ -23,7 +36,7 @@
                     @endif
                     
                     @foreach($course->chapters as $chapter)
-                    <div class="text-dark-emphasis bg-dark border rounded-3">
+                    <div class="text-dark-emphasis bg-dark border rounded-3" id="{{ $chapter->id }}">
                         <div class="card m-1">
                             <div class="card-body rounded">
                                 <h4 class="card-title">{{ $chapter->title }}</h4>
@@ -65,16 +78,27 @@
             var correctAnswer = target.getAttribute('data-correct-answer');
 
             if (userAnswer === correctAnswer) {
-                alert('Correct!');
+                toastr.success('Correct!');
             } else {
-                alert('Wrong!');
+                toastr.error('Wrong!');
             }
         }
 
         if (target.classList.contains('show-answer')) {
             var correctAnswer = target.getAttribute('data-correct-answer');
-            alert(correctAnswer);
+            toastr.info(correctAnswer, "Correct answer:");
         }
     });
+
+    function scroll_to_div (id) 
+    {
+        var div = document.getElementById (id);
+        if (div) 
+        {
+            div.scrollIntoView ();
+        }
+    }
+
+
 </script>
 @endsection
