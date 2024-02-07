@@ -84,6 +84,6 @@ class ChapterController extends Controller
 
         $chapter->delete();
         toastr()->error($chapter->title . ' deleted!');
-        return back();
+        return view('welcome');
     }
 }

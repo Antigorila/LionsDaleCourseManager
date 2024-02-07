@@ -56,15 +56,12 @@ class DoneTaskController extends Controller
             ->where('course_id', $done_task->course_id)
             ->pluck('id');
 
-
             foreach ($chapters as $chapter) {
                 $questionInChapter = DB::table('questions')
                 ->where('chapter_id', $chapter)
                 ->count('id');
                 $questionInCourse += $questionInChapter;
             }
-
-            
 
             if($questionInCourse === $correctAnswersYetByStudentInThisCourse)
             {

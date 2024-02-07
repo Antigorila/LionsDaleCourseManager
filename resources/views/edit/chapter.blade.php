@@ -29,11 +29,11 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-info m-2">Save</button>
             </form> 
-                        <form action="{{ route('chapters.destroy', $chapter) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger m-2">Delete this chapter</button>
-                        </form>
+            <form id="deleteChapterForm" action="{{ route('chapters.destroy', $chapter) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button id="deleteChapterButton" type="submit" class="btn btn-danger m-2">Delete this chapter</button>
+            </form>
                     </div>
                     <hr class="text-white"> 
                     @if ($chapter->questions->count() > 0)
@@ -47,9 +47,13 @@
                         <label for="answer" class="form-label text-white">Answer:</label>
                         <input name="answer" id="answer" class="form-control mb-3" value="{{ $question->answer }}">    
                         <button type="submit" class="btn btn-info m-2">Save</button>
-                        <button type="submit" class="btn btn-danger m-2">Delete</button>
-                        <hr class="text-white"> 
                     </form>
+                    <form action="{{ route('questions.destroy', $question) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger m-2">Delete question</button>
+                    </form>
+                    <hr class="text-white"> 
                     @endforeach
                     @else
                         <label for="name" class="form-label text-white">There is no questions yet...</label>

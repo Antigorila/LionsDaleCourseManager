@@ -54,24 +54,22 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">Answer:</span>
                                                         </div>
-                                                        <input type="text" class="form-control" id="answer{{ $index }}" aria-describedby="basic-addon1" placeholder="{{ $question->question }}">
+                                                        <input type="text" class="form-control" id="answer{{ $index }}" aria-describedby="basic-addon1" placeholder="{{ $question->answer }}">
                                                     </div>
                                                     <button class="btn btn-info m-2 check-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Check</button>  
-                                                    <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button> 
+                                                    <a class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</a> 
                                                 </div>
                                               </div>
                                             @else
-                                                <div class="col">
-                                                    <form action="{{ route('done_tasks.store') }}" method="POST">
-                                                        @csrf
-                                                        @method('POST')
-                                                        <input type="text" class="form-control" id="answer" name="answer" aria-describedby="basic-addon1" placeholder="Answer">
-                                                        <input hidden name="question_id" id="question_id" value="{{ $question->id }}">
-                                                        <input hidden name="course_id" id="course_id" value="{{ $course->id }}">
-                                                        <button type="submit" class="btn btn-info m-2 check-answer">Check</button>  
-                                                    </form>        
-                                                </div>
-                                                <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}">Show answer</button>    
+                                            <form action="{{ route('done_tasks.store') }}" method="POST">
+                                                @csrf
+                                                @method('POST')
+                                                    <input type="text" class="form-control" id="answer" name="answer" aria-describedby="basic-addon1" placeholder="Answer">
+                                                    <input hidden name="question_id" id="question_id" value="{{ $question->id }}">
+                                                    <input hidden name="course_id" id="course_id" value="{{ $course->id }}">
+                                                    <button type="submit" class="btn btn-info m-2 check-answer">Check</button>
+                                                </form>
+                                                <button class="btn btn-info m-2 show-answer" data-index="{{ $index }}" data-correct-answer="{{ $question->answer }}" style="margin-left: 10px;">Show answer</button>      
                                             @endif
                                             <hr class="m-2 text-white">                                          
                                         @endforeach

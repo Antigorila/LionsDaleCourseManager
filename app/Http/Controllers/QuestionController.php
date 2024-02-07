@@ -78,7 +78,12 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        $this->authorize('delete', Question::class);
+        $this->authorize('delete', $question);
+
+        foreach($question->doneTasks as $doneTask )
+        {
+            $doneTask->delete();
+        }
 
         $question->delete();
         toastr()->error( $question->questionn .  ' deleted!');
