@@ -81,6 +81,14 @@ class ChapterController extends Controller
         $this->authorize('delete', $chapter);
 
         $chapter->questions()->delete();
+        foreach($chapter->questions as $question)
+        {
+            foreach($question->doneTasks as $doneTask )
+            {
+                $doneTask->delete();
+            }
+            $question->delete();
+        }
 
         $chapter->delete();
         toastr()->error($chapter->title . ' deleted!');
